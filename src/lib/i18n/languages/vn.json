@@ -1,0 +1,13 @@
+{
+    "login": "Đăng nhập",
+    "logout": "Đăng xuất",
+    "register": "Đăng ký",
+    "username": "Tên đăng nhập",
+    "password": "Mật khẩu",
+    "confirm_password": "Xác nhận mật khẩu",
+    "forgot_password": "Quên mật khẩu?",
+    "remember_me": "Ghi nhớ đăng nhập",
+    "welcome_back": "Chào mừng quay trở lại, {{name}}!",
+    "login_success": "Bạn đã đăng nhập thành công.",
+    "login_failed": "Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin."
+}

@@ -1,0 +1,11 @@
+{
+    "tabWidth": 4,
+    "singleQuote": true,
+    "useTabs": false,
+    "bracketSameLine": true,
+    "printWidth": 120,
+
+    "endOfLine": "auto",
+    "use-life-cycle-interface": false
+
+}

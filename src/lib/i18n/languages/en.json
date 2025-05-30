@@ -1,0 +1,13 @@
+{
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register",
+    "username": "Username",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "forgot_password": "Forgot Password?",
+    "remember_me": "Remember Me",
+    "welcome_back": "Welcome back, {{name}}!",
+    "login_success": "You have successfully logged in.",
+    "login_failed": "Login failed. Please check your credentials."
+}
