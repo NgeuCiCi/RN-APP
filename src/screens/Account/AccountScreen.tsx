@@ -1,27 +1,36 @@
-import { createElement, Fragment, useCallback, useMemo, useRef, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { Fragment, useCallback, useMemo, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Animated, RefreshControl, StyleSheet, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { useImages, useSvgs } from '../../hooks';
+import { CListIconTitle, CSvg } from '../../components';
+import { useGetAssets } from '../../hooks';
 import { FastImage } from '../../lib';
+import { useAppModal } from '../../providers/ModalProvider';
 import { RootState } from '../../store';
-import { setLogout } from '../../store/slices/user/userSlice';
-import { getDeviceInfo, getFontSizeByScreen, getScreenHeight, getScreenWidth } from '../../utils/Utils';
-import withThemedSvg from './../../hoc/withThemedSvg';
+import { getDeviceInfo, getFontSizeByScreen, getScreen } from '../../utils/Utils';
 
 const offsetY = new Animated.Value(0);
-const screenHeight = getScreenHeight();
-const screenWidth = getScreenWidth();
+const { screenHeight, screenWidth } = getScreen();
+const { isTablet } = getDeviceInfo();
 
 const AccountScreen = (props) => {
+    const navigation = useNavigation();
     const dispatch = useDispatch();
-    const { IImageDefalut } = useSvgs();
+    const { onShowModal, onHideModal } = useAppModal();
+    const {
+        Svgs: { IImageDefalut },
+        Images: { MingAvt, defaultCover },
+        Colors: { grayShades },
+    } = useGetAssets();
     const [refreshing, setRefreshing] = useState(false);
     const scrollViewRef: any = useRef(null);
     const [heightHeader, setHeightHeader] = useState(100);
     const fontSizeByHeight = getFontSizeByScreen();
-    const { isTablet } = getDeviceInfo();
     const user = useSelector((state: RootState) => state.user);
     const { info } = user || {};
+    const { t } = useTranslation();
+
     const onRefresh = useCallback(() => {
         setRefreshing(true);
         setTimeout(() => {
@@ -68,14 +77,11 @@ const AccountScreen = (props) => {
                         {', BTS'}
                     </Animated.Text>
                 </View>
-                {/* {createElement(withThemedSvg(INotification), { isBackground: true })} */}
             </Animated.View>
         );
     }, []);
 
     const _renderImageUser = useMemo(() => {
-        const { MingAvt, defaultCover } = useImages();
-
         return (
             <FastImage
                 style={[
@@ -101,13 +107,58 @@ const AccountScreen = (props) => {
                         )}
                     </View>
                     <View>
-                        {createElement(withThemedSvg(IImageDefalut), {
-                            isBackground: true,
-                            isScale: true,
-                            onPress: () => {
-                                dispatch(setLogout());
-                            },
-                        })}
+                        <CSvg
+                            Svg={IImageDefalut}
+                            isBackground={true}
+                            onPress={() => {
+                                onShowModal(
+                                    <Fragment>
+                                        <CListIconTitle
+                                            list={[
+                                                {
+                                                    titleOpts: {
+                                                        title: 'Title 1',
+                                                        label: 'Label',
+                                                    },
+                                                    iconOpts: {
+                                                        name: 'INotification',
+                                                        isBackground: true,
+                                                        adjust: 0.2,
+                                                        size: 'lg',
+                                                    },
+                                                    navigateScreen: 'HomeScreen1',
+                                                },
+                                                {
+                                                    titleOpts: {
+                                                        title: 'Title 2',
+                                                        // label: 'Label',
+                                                    },
+                                                    iconOpts: {
+                                                        name: 'IOrder',
+                                                        isBackground: true,
+                                                        adjust: 0.2,
+                                                    },
+                                                    navigateScreen: 'HomeScreen1',
+                                                },
+                                                {
+                                                    titleOpts: {
+                                                        title: 'Title 3',
+                                                        // label: 'Label',
+                                                    },
+                                                    iconOpts: {
+                                                        name: 'IAccount',
+                                                        isBackground: true,
+                                                        adjust: 0.2,
+                                                    },
+                                                    navigateScreen: 'HomeScreen1',
+                                                },
+                                            ]}
+                                        />
+                                    </Fragment>,
+                                    { style: { justifyContent: 'flex-end' } },
+                                );
+                            }}
+                        />
                     </View>
                 </View>
             </FastImage>
@@ -115,7 +166,13 @@ const AccountScreen = (props) => {
     }, [heightHeader]);
 
     return (
-        <View style={styles.container}>
+        <View
+            style={[
+                styles.container,
+                {
+                    backgroundColor: grayShades[0],
+                },
+            ]}>
             {_renderHeader}
             <Animated.ScrollView
                 ref={scrollViewRef}
@@ -134,6 +191,62 @@ const AccountScreen = (props) => {
                 )}
                 refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
                 {_renderImageUser}
+                <CListIconTitle
+                    titleOpts={{
+                        title: 'Title 1',
+                    }}
+                    isHaveIRight={true}
+                    list={[
+                        {
+                            titleOpts: {
+                                title: 'Title 1',
+                                label: 'Label',
+                            },
+                            iconOpts: {
+                                name: 'INotification',
+                                isBackground: true,
+                                adjust: 0.2,
+                                size: 'lg',
+                            },
+                            navigateScreen: 'HomeScreen1',
+                            onPress: () => {
+                                navigation.navigate('Account', { screen: 'HomeScreen1' });
+                            },
+                        },
+                        {
+                            titleOpts: {
+                                title: 'Title 2',
+                                // label: 'Label',
+                            },
+                            iconOpts: {
+                                name: 'IOrder',
+                                isBackground: true,
+                                adjust: 0.2,
+                            },
+                            navigateScreen: 'HomeScreen1',
+                            onPress: () => {
+                                navigation.navigate('HomeScreen1');
+                            },
+                        },
+                        {
+                            titleOpts: {
+                                title: 'Title 3',
+                                // label: 'Label',
+                            },
+                            iconOpts: {
+                                name: 'IAccount',
+                                isBackground: true,
+                                adjust: 0.2,
+                            },
+                            isHaveIRight: false,
+                            navigateScreen: 'HomeScreen1',
+                            onPress: () => {
+                                // navigation.navigate('HomeScreen')
+                            },
+                        },
+                    ]}
+                />
+
                 <View style={{ height: 900 }}></View>
             </Animated.ScrollView>
         </View>

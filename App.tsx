@@ -8,6 +8,7 @@ import './src/lib/i18n/index';
 import { initI18n } from './src/lib/i18n/index';
 import { TabNav, DrawerNav } from './src/navigators';
 import { ToastProvider } from './src/providers/ToastProvider';
+import { ModalProvider } from './src/providers/ModalProvider';
 
 function App(): JSX.Element {
     const [isI18nReady, setI18nReady] = useState(false);
@@ -31,7 +32,9 @@ function App(): JSX.Element {
         <RootSiblingParent>
             <ToastProvider>
                 <NavigationContainer>
-                    <DrawerNav />
+                    <ModalProvider>
+                        <TabNav />
+                    </ModalProvider>
                 </NavigationContainer>
                 <Toast
                     config={{

@@ -1,18 +1,16 @@
 import { memo } from 'react';
 import Svg, { Circle, Defs, G, LinearGradient, Path, Stop } from 'react-native-svg';
-import { _SvgProps } from '../../hoc/withThemedSvg';
-import { scaleSize } from '../../utils/Utils';
+import { _SvgProps } from '../../components/common/CSvg';
 
 const SvgComponent = (props: _SvgProps) => {
-    let { size = 20, color, colorDarker, isScale } = props;
-    size = isScale ? scaleSize(size) : size;
+    let { size = 20, color } = props;
 
     return (
         <Svg data-name="download (10)" width={size} height={size} viewBox={'0 0 20 20'} {...props}>
             <Defs>
                 <LinearGradient id="a" x1={0.5} x2={0.5} y2={1} gradientUnits="objectBoundingBox">
                     <Stop offset={0} stopColor={color} />
-                    <Stop offset={1} stopColor={colorDarker} />
+                    <Stop offset={1} stopColor={color} />
                 </LinearGradient>
             </Defs>
             <Path data-name="Path 5670" d="M0 20V0h20v20Z" fill="none" />

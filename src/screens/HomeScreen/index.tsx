@@ -1,12 +1,27 @@
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { MD2Colors, Text } from 'react-native-paper';
 import { getDeviceInfo } from '../../utils/Utils';
+import { useNavigation } from '@react-navigation/native';
 
 function HomeScreen() {
     const { version } = getDeviceInfo();
+    const navigation = useNavigation();
 
-    useEffect(() => { }, []);
+    // useLayoutEffect(() => {
+    //     const parent = navigation.getParent();
+    //     parent?.setOptions({
+    //         tabBarStyle: { display: 'none' },
+    //     });
+
+    //     return () => {
+    //         parent?.setOptions({
+    //             tabBarStyle: undefined,
+    //         });
+    //     };
+    // }, [navigation]);
+
+    // useEffect(() => {}, []);
 
     return (
         <View style={styles.container}>

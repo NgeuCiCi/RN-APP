@@ -1,11 +1,9 @@
 import { memo } from 'react';
 import Svg, { Circle, G, Path } from 'react-native-svg';
-import { _SvgProps } from '../../hoc/withThemedSvg';
-import { scaleSize } from '../../utils/Utils';
+import { _SvgProps } from '../../components/common/CSvg';
 
 const SvgComponent = (props: _SvgProps) => {
-    let { size = 20, color, isScale } = props;
-    size = isScale ? scaleSize(size) : size;
+    let { size = 20, color } = props;
     return (
         <Svg viewBox={'0 0 256 256'} width={size} height={size} {...props}>
             <Path d="M0 256V0h256v256z" fill="none" />

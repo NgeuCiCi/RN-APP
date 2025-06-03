@@ -3,22 +3,24 @@ import { useState } from 'react';
 import { Text, View } from 'react-native';
 import { List } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
+import { CSvg } from '../components';
 import { NAME_STACKS } from '../constants';
-import { withThemedSvg } from '../hoc';
-import { useImages, useSvgs } from '../hooks';
+import { useGetAssets } from '../hooks';
 import { FastImage } from '../lib';
 import type { RootState } from '../store/index';
 import { setLogout } from '../store/slices/user/userSlice';
-import { getScreenWidth } from '../utils/Utils';
+import { getScreen } from '../utils/Utils';
 
-const screenWidth = getScreenWidth();
+const { screenWidth } = getScreen();
 
 const CustomDrawer = (props) => {
     const [expanded, setExpanded] = useState<string[]>([]);
-    const SVGs = useSvgs();
     const dispatch = useDispatch();
-    const { MingAvt, defaultCover } = useImages();
-
+    const {
+        Metrics: { iconSize },
+        Images: { MingAvt },
+        Svgs,
+    } = useGetAssets();
     const { info } = useSelector((state: RootState) => state.user);
 
     return (
@@ -50,8 +52,6 @@ const CustomDrawer = (props) => {
                 </View>
                 <List.Section>
                     {NAME_STACKS.map(({ name, icon, title, screens }, index) => {
-                        const SvgComponent = SVGs[icon];
-                        const Icon = withThemedSvg(SvgComponent);
                         const isActive = expanded.includes(name);
                         return (
                             <List.Accordion
@@ -70,7 +70,7 @@ const CustomDrawer = (props) => {
                                     }
                                 }}
                                 left={() => {
-                                    return <Icon isActive={isActive} size={26} />;
+                                    return <CSvg Svg={Svgs[icon]} isActive={isActive} size={iconSize.md} />;
                                 }}>
                                 {screens.map(({ screen, title }, index) => {
                                     return (

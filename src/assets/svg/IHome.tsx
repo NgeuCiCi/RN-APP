@@ -1,13 +1,11 @@
 import React from 'react';
 import Svg, { Path } from 'react-native-svg';
-import { _SvgProps } from '../../hoc/withThemedSvg';
-import { scaleSize } from '../../utils/Utils';
+import { _SvgProps } from '../../components/common/CSvg';
 
 function SvgComponent(props: _SvgProps) {
-  let { size = 24, color, isScale } = props;
-  size = isScale ? scaleSize(size) : size;
+  let { size = 24, color } = props;
   return (
-    <Svg data-name="Group 10135" width={24} height={24} viewBox="0 0 24 24" {...props}>
+    <Svg data-name="Group 10135" width={size} height={size} viewBox="0 0 24 24" {...props}>
       <Path data-name="Path 3544" d="M0 0h24v24H0z" fill="none" />
       <Path
         data-name="Path 3545"

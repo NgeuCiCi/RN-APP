@@ -1,10 +1,8 @@
 const Colors = {
     svgActive: '#feb729',
-    svgActiveDarker1: '#fe9d06',
-    svgNotActive: '#a4a7aa',
-    svgNotActiveDarker1: '#252b31',
+    svgPrimary: '#a4a7aa',
 
-    gradientButton: ['#FDB627', '#FCB221', '#FCAF1C', '#FCAC17', '#FCA811', '#FCA50C', '#FCA207', '#FC9F02'],
+    grayShades: ['#f0f1f5', '#e3e3e3', '#999999'],
 };
 
 export default Colors;

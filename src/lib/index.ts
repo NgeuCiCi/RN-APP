@@ -1,2 +1,3 @@
 import FastImage from 'react-native-fast-image';
-export { FastImage } 
+import Modal from 'react-native-modal';
+export { FastImage, Modal };

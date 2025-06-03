@@ -1,18 +1,12 @@
 import * as React from 'react';
 import Svg, { G, Path } from 'react-native-svg';
-import { _SvgProps } from '../../hoc/withThemedSvg';
-import { scaleSize } from '../../utils/Utils';
+import { _SvgProps } from '../../components/common/CSvg';
 
 function SvgComponent(props: _SvgProps) {
-    let { size = 20, color, isScale } = props;
-    size = isScale ? scaleSize(size) : size;
+    let { size = 20, color } = props;
 
     return (
-        <Svg
-            width={size - (4) || 16}
-            height={size}
-            viewBox="0 0 16 20"
-            {...props}>
+        <Svg width={size - 4 || 16} height={size} viewBox="0 0 16 20" {...props}>
             <G data-name="Group 13302">
                 <G data-name="Group 2481">
                     <G data-name="Group 2480">

@@ -1,17 +1,16 @@
+import _ from 'lodash';
 import { Dimensions } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
-import _ from 'lodash';
+import tinycolor from 'tinycolor2';
+import { Types } from '../assets/types';
+import { NAME_BREAKPOINT } from '../constants';
 
-export const getScreenHeight = () => {
+export const getScreen = () => {
     const scale = Dimensions.get('screen').scale / Dimensions.get('window').scale;
-    const curHeight = Dimensions.get('window').height;
-    return curHeight * scale;
-};
-
-export const getScreenWidth = () => {
-    const scale = Dimensions.get('screen').scale / Dimensions.get('window').scale;
-    const curWidth = Dimensions.get('window').width;
-    return curWidth * scale;
+    return {
+        screenHeight: Dimensions.get('window').height * scale,
+        screenWidth: Dimensions.get('window').width * scale,
+    };
 };
 
 export const getDeviceInfo = () => {
@@ -20,20 +19,25 @@ export const getDeviceInfo = () => {
 
 export const getFontSizeByScreen = (type: 'height' | 'width' = 'width') => {
     const { isTablet } = getDeviceInfo();
+    const { screenHeight, screenWidth } = getScreen();
     const scale = isTablet ? 0.02 : 0.04;
-    const px = type == 'width' ? getScreenWidth() : getScreenHeight();
+    const px = type == 'width' ? screenWidth : screenHeight;
 
     return scale * px;
 };
 export const scaleSize = (value: number) => {
     const { isTablet } = getDeviceInfo();
-
     return isTablet ? value * 3 : value;
 };
 
 export const isEmpty = (obj) => {
     return _.isEmpty(obj);
 };
+
+export const isEqual = (obj) => {
+    return _.isEqual(obj);
+};
+
 export function isArray(value, isNotEmpty?) {
     if (Array.isArray(value)) {
         if (isNotEmpty) {
@@ -46,18 +50,47 @@ export function isArray(value, isNotEmpty?) {
     return false;
 }
 export function isNumber(value) {
-    if (typeof value === 'number') { return true; }
-    if (value && value.toString().split('.') === 2 && typeof parseFloat(value) === 'number') { return true; }
-    if (isNumeric(value)) { return true; }
+    if (typeof value === 'number') {
+        return true;
+    }
+    if (value && value.toString().split('.') === 2 && typeof parseFloat(value) === 'number') {
+        return true;
+    }
+    if (isNumeric(value)) {
+        return true;
+    }
     return false;
 }
 
-export const removeSameObject = (data, key) => {
-    return data.filter((v, i, a) => a.findIndex(t => (t[key] === v[key])) === i)
+export function isNumeric(str) {
+    if (!str) {
+        return false;
+    }
+    if (str.toString().match(/^[0-9]+$/) === null) {
+        return false;
+    }
+    return true;
 }
 
-export function isNumeric(str) {
-    if (!str) { return false; }
-    if (str.toString().match(/^[0-9]+$/) === null) { return false; }
-    return true;
+export const adjustColor = (color: string, percentage: number = 0) => {
+    return percentage > 0
+        ? tinycolor(color)
+            .darken(percentage * 100)
+            .toString()
+        : tinycolor(color)
+            .lighten(Math.abs(percentage) * 100)
+            .toString();
+};
+
+export function getAdjacentBreakpoint(current: Types.size): Types.size[] {
+    const index = NAME_BREAKPOINT.indexOf(current);
+    let indexStart, indexEnd;
+    if (index === -1) {
+        return [current, current];
+    }
+
+    indexStart = index - 1 > 0 ? index - 1 : 0;
+    indexEnd = index + 1 < NAME_BREAKPOINT.length - 1 ? index + 1 : NAME_BREAKPOINT.length - 1;
+
+    return [NAME_BREAKPOINT[indexStart], NAME_BREAKPOINT[indexEnd]];
 }

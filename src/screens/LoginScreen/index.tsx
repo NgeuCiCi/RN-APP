@@ -5,9 +5,12 @@ import { Button, Card, Text, TextInput, useTheme } from 'react-native-paper';
 import { ToastState, useToast } from '../../providers/ToastProvider';
 import { useLoginMutation } from '../../store/services/auth/services';
 import { getDeviceInfo } from '../../utils/Utils';
+import { useDispatch } from 'react-redux';
+import { setLogin } from '../../store/slices/user/userSlice';
 
 function LoginScreen({ navigation }) {
     const { version } = getDeviceInfo();
+    const dispatch = useDispatch();
     const { ToastNoblandMessageMulti } = useToast();
 
     const [username, setUsername] = useState('hieuhoang@ucall.asia');
@@ -21,10 +24,10 @@ function LoginScreen({ navigation }) {
 
     const handleLogin = async () => {
         try {
-            const data = await login({ username, password }).unwrap();
+            dispatch(setLogin());
+            // const data = await login({ username, password }).unwrap();
+            // console.log('TCL: SangBT: data', data);
             navigation.navigate('Account', { screen: 'AccountScreen' });
-
-            // ToastNoblandMessageMulti('Đăng nhập thành công', { type: ToastState.SUCCESS });
         } catch (error) {
             console.log('TCL: SangBT: error', error);
         }
@@ -64,7 +67,7 @@ function LoginScreen({ navigation }) {
             </Card>
         </View>
     );
-};
+}
 
 const styles = StyleSheet.create({
     input: {

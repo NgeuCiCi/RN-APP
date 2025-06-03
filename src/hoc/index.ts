@@ -1,1 +1,1 @@
-export { default as withThemedSvg } from './withThemedSvg';
+export { default as withMemo } from './withMemo';

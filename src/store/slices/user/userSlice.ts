@@ -17,6 +17,12 @@ export const userSlice = createSlice({
         setLogout: () => {
             return {};
         },
+        setLogin: (state: any) => {
+            state.info = {
+                name: 'BTS',
+                phone: '0123456789',
+            };
+        },
     },
     extraReducers: (builder) => {
         builder.addMatcher(loginApi.endpoints.login.matchFulfilled, (state: any, action: PayloadAction<any>) => {
@@ -25,7 +31,7 @@ export const userSlice = createSlice({
     },
 });
 
-export const { setLogout } = userSlice.actions;
+export const { setLogout, setLogin } = userSlice.actions;
 
 export const action = userSlice.actions;
 

@@ -1,11 +1,9 @@
 import { memo } from 'react';
 import Svg, { G, Path } from 'react-native-svg';
-import { _SvgProps } from '../../hoc/withThemedSvg';
-import { scaleSize } from '../../utils/Utils';
+import { _SvgProps } from '../../components/common/CSvg';
 
 const SvgComponent = (props: _SvgProps) => {
-    let { size = 20, color, isScale } = props;
-    size = isScale ? scaleSize(size) : size;
+    let { size = 20, color } = props;
 
     return (
         <Svg data-name="download (26)" viewBox={'0 0 20 20'} width={size} height={size} {...props}>

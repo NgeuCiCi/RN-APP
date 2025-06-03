@@ -1,8 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useSelector } from 'react-redux';
+import { CSvg } from '../components';
 import { NAME_STACKS } from '../constants';
-import { withThemedSvg } from '../hoc';
-import { useColors, useSvgs } from '../hooks';
+import { useGetAssets } from '../hooks';
 import { LoginScreen } from '../screens';
 import { RootState } from '../store';
 import { isEmpty } from '../utils/Utils';
@@ -11,10 +11,11 @@ import * as Stacks from './stacks';
 const Tab = createBottomTabNavigator();
 
 const TabNav = () => {
-    const { svgActive, svgNotActive } = useColors();
-    const SVGs = useSvgs();
     const user = useSelector((state: RootState) => state.user);
-
+    const {
+        Colors: { svgActive, svgPrimary },
+        Svgs,
+    } = useGetAssets();
     return (
         <Tab.Navigator
             // initialRouteName={isEmpty(user) ? 'Login' : 'Account'}
@@ -23,12 +24,10 @@ const TabNav = () => {
                 return {
                     headerShown: false,
                     tabBarIcon: ({ focused }) => {
-                        const SvgComponent = SVGs['I' + name];
-                        const Icon = withThemedSvg(SvgComponent);
-                        return <Icon isActive={focused} />;
+                        return <CSvg Svg={Svgs['I' + name]} isActive={focused} />;
                     },
                     tabBarActiveTintColor: svgActive,
-                    tabBarInactiveTintColor: svgNotActive,
+                    tabBarInactiveTintColor: svgPrimary,
                     tabBarLabelStyle: {
                         fontSize: 14,
                         fontWeight: 'bold',
