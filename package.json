@@ -58,6 +58,7 @@
     "react-native-screens": "4.10.0",
     "react-native-sqlite-storage": "^6.0.1",
     "react-native-svg": "^15.11.2",
+    "react-native-tab-view": "^4.1.1",
     "react-native-table-component": "^1.2.2",
     "react-native-toast-message": "^2.2.1",
     "react-native-vector-icons": "^10.2.0",

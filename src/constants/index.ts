@@ -1,7 +1,7 @@
 import { Types } from '../assets/types';
 
 export const NAME_STACKS = [
-    { name: 'Order', title: 'Đơn hàng', icon: 'IOrder', screens: [{ screen: 'AccountScreen', title: 'Đơn hàng 1' }] },
+    { name: 'Order', title: 'Đơn hàng', icon: 'IOrder', screens: [{ screen: 'InfoUserScreen', title: 'Đơn hàng 1' }] },
     {
         name: 'Notification',
         title: 'Thông báo',
@@ -20,7 +20,7 @@ export const NAME_STACKS = [
         icon: 'IAccount',
         screens: [
             { screen: 'AccountScreen', title: 'Tài khoản 1' },
-            { screen: 'HomeScreen1', title: 'Lịch hẹn 1' },
+            { screen: 'InfoUserScreen', title: 'Lịch hẹn 1' },
         ],
     },
 ];

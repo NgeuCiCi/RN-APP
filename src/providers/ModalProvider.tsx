@@ -1,63 +1,109 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
-import { StyleProp, View, ViewStyle } from 'react-native';
+import { View, ViewStyle } from 'react-native';
 import { CLine } from '../components';
-import { getScreen } from '../utils/Utils';
+import { useGetAssets } from '../hooks';
 import { Modal } from '../lib';
-
+import { getScreen } from '../utils/Utils';
 type ModalContextType = {
     onShowModal: (content: ReactNode, Otps?: OtpsType) => void;
     onHideModal: () => void;
 };
 type OtpsType = {
-    style?: StyleProp<ViewStyle>;
+    style?: ViewStyle;
+    position?: 'bottom' | 'center' | 'top';
 };
 
 const ModalContext = createContext<ModalContextType>({
     onShowModal: () => { },
     onHideModal: () => { },
 });
-const { screenHeight, screenWidth } = getScreen();
+
+const OPTS = {
+    top: {
+        justifyContent: 'flex-start',
+        styleName: 'modalTop',
+        swipeDirection: 'up',
+        animationIn: 'slideInDown',
+        animationOut: 'slideOutUp',
+    },
+    center: {
+        justifyContent: 'center',
+        styleName: 'modalCenter',
+        swipeDirection: ['down', 'up'],
+        animationIn: 'fadeIn',
+        animationOut: 'fadeOut',
+    },
+    bottom: {
+        justifyContent: 'flex-end',
+        styleName: 'modalBottom',
+        swipeDirection: 'down',
+        animationIn: 'slideInUp',
+        animationOut: 'slideOutDown',
+    },
+};
 
 export const useAppModal = () => useContext(ModalContext);
 
 export const ModalProvider = ({ children }: { children: ReactNode }) => {
-    const [modalStyle, setModalStyle] = useState<StyleProp<ViewStyle>>({});
-    const [modalContent, setModalContent] = useState<ReactNode>(null);
-    const onShowModal = (content: ReactNode, Otps?: OtpsType) => {
-        const { style } = Otps || {};
-        setModalContent(content);
-        setModalStyle(style);
+    const { screenHeight, screenWidth } = getScreen();
+    const [modalContent, setModalContent] = useState<any>(null);
+    const [isVisible, setIsVisible] = useState(false);
+
+    const { position = 'center', component, style } = modalContent || {};
+    const { justifyContent, styleName, swipeDirection, animationIn, animationOut } = OPTS[position] || {};
+
+    const {
+        Metrics: { spacing },
+        Styles,
+    } = useGetAssets();
+
+    const onShowModal = (component: ReactNode, Otps?: OtpsType) => {
+        const { style = {}, position } = Otps || {};
+        setModalContent({ component, position, style });
+        setIsVisible(true);
     };
 
     const onHideModal = () => {
-        setModalContent(null);
+        setIsVisible(false);
     };
 
     return (
         <ModalContext.Provider value={{ onShowModal, onHideModal }}>
             {children}
             <Modal
-                isVisible={!!modalContent}
+                isVisible={isVisible}
                 deviceWidth={screenWidth}
                 deviceHeight={screenHeight}
+                useNativeDriver={true}
                 avoidKeyboard={true}
-                hideModalContentWhileAnimating={true}
-                style={[{ margin: 0, justifyContent: 'center', }, modalStyle]}
+                hasBackdrop={true}
+                coverScreen={true}
+                backdropColor="black"
+                backdropOpacity={0.5}
+                hideModalContentWhileAnimating={false}
+                style={[{ margin: 0, justifyContent }, style]}
                 onBackdropPress={onHideModal}
                 onBackButtonPress={onHideModal}
                 onSwipeComplete={onHideModal}
-                swipeDirection={'down'}
-                animationIn={'slideInUp'}
-                animationOut={'slideOutDown'}
-                backdropTransitionOutTiming={300}
-                animationOutTiming={300}
-                coverScreen={true}
-                hasBackdrop={true}>
-                <View style={[{ backgroundColor: '#fff', borderTopLeftRadius: 8, borderTopRightRadius: 8, paddingBottom: 8 }]}>
-                    <CLine style={{ height: 4, width: 40, marginTop: 4 }} />
-                    {modalContent}
-                    <View>123</View>
-                </View>
+                swipeDirection={swipeDirection}
+                animationIn={animationIn}
+                animationOut={animationOut}
+                animationInTiming={800}
+                backdropTransitionInTiming={800}
+                backdropTransitionOutTiming={800}
+                animationOutTiming={800}
+                onModalHide={() => setModalContent(null)}>
+                {modalContent && (
+                    <View style={[{ backgroundColor: '#fff' }, Styles[styleName]]}>
+                        {position === 'bottom' && (
+                            <CLine style={{ height: spacing.sm, width: spacing.xxl, marginTop: spacing.sm }} />
+                        )}
+                        {component}
+                        {position === 'top' && (
+                            <CLine style={{ height: spacing.sm, width: spacing.xxl, marginBottom: spacing.sm }} />
+                        )}
+                    </View>
+                )}
             </Modal>
         </ModalContext.Provider>
     );

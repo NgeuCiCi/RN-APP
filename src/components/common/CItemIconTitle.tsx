@@ -3,7 +3,7 @@ import { FunctionComponent, useCallback } from 'react';
 import { Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { Types } from '../../assets/types';
 import { SIZE_DEFAULT } from '../../constants';
-import { withMemo } from '../../hoc/withMemo';
+import { withMemo } from '../../hoc';
 import { useGetAssets } from '../../hooks';
 import { getAdjacentBreakpoint } from '../../utils/Utils';
 import CLine from './CLine';
@@ -52,7 +52,7 @@ const CItemIconTitle: FunctionComponent<CItemIconTitleProps> = (props) => {
         <View style={{ paddingHorizontal: spacing[size] }}>
             <TouchableOpacity activeOpacity={1} onPress={handlePress} style={{ paddingVertical: spacing[size] }}>
                 <View style={[rowAlignCenter, { gap: 12 }]}>
-                    <CSvg Svg={Svgs[name]} size={size} {...iconOpts} />
+                    <CSvg svg={name} size={size} {...iconOpts} />
                     <View style={[flexChild, { justifyContent: 'center' }]}>
                         <Text
                             numberOfLines={1}
@@ -80,7 +80,7 @@ const CItemIconTitle: FunctionComponent<CItemIconTitleProps> = (props) => {
                     </View>
                     {isHaveIRight && (
                         <View style={{ marginLeft: 'auto' }}>
-                            <CSvg Svg={Svgs['IRight']} size={sizeStart} adjust={0.5} />
+                            <CSvg svg={'IRight'} size={sizeStart} adjust={0.5} />
                         </View>
                     )}
                 </View>

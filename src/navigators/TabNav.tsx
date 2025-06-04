@@ -14,7 +14,6 @@ const TabNav = () => {
     const user = useSelector((state: RootState) => state.user);
     const {
         Colors: { svgActive, svgPrimary },
-        Svgs,
     } = useGetAssets();
     return (
         <Tab.Navigator
@@ -24,7 +23,7 @@ const TabNav = () => {
                 return {
                     headerShown: false,
                     tabBarIcon: ({ focused }) => {
-                        return <CSvg Svg={Svgs['I' + name]} isActive={focused} />;
+                        return <CSvg svg={'I' + name} isActive={focused} />;
                     },
                     tabBarActiveTintColor: svgActive,
                     tabBarInactiveTintColor: svgPrimary,

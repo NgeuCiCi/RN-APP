@@ -1,14 +1,14 @@
-import { useNavigation } from '@react-navigation/native';
 import { Fragment, useCallback, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Animated, RefreshControl, StyleSheet, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { CListIconTitle, CSvg } from '../../components';
+import { CButton, CItemIconTitle, CListIconTitle, CSvg } from '../../components';
 import { useGetAssets } from '../../hooks';
 import { FastImage } from '../../lib';
 import { useAppModal } from '../../providers/ModalProvider';
 import { RootState } from '../../store';
 import { getDeviceInfo, getFontSizeByScreen, getScreen } from '../../utils/Utils';
+import { useNavigation } from '@react-navigation/native';
 
 const offsetY = new Animated.Value(0);
 const { screenHeight, screenWidth } = getScreen();
@@ -19,10 +19,13 @@ const AccountScreen = (props) => {
     const dispatch = useDispatch();
     const { onShowModal, onHideModal } = useAppModal();
     const {
-        Svgs: { IImageDefalut },
+        Metrics: { },
+        Styles: { },
+        Svgs: { IImageDefalut, INotification },
         Images: { MingAvt, defaultCover },
         Colors: { grayShades },
     } = useGetAssets();
+
     const [refreshing, setRefreshing] = useState(false);
     const scrollViewRef: any = useRef(null);
     const [heightHeader, setHeightHeader] = useState(100);
@@ -108,7 +111,7 @@ const AccountScreen = (props) => {
                     </View>
                     <View>
                         <CSvg
-                            Svg={IImageDefalut}
+                            svg={'IImageDefalut'}
                             isBackground={true}
                             onPress={() => {
                                 onShowModal(
@@ -124,7 +127,7 @@ const AccountScreen = (props) => {
                                                         name: 'INotification',
                                                         isBackground: true,
                                                         adjust: 0.2,
-                                                        size: 'lg',
+                                                        // size: 'lg',
                                                     },
                                                     navigateScreen: 'HomeScreen1',
                                                 },
@@ -155,7 +158,7 @@ const AccountScreen = (props) => {
                                             ]}
                                         />
                                     </Fragment>,
-                                    { style: { justifyContent: 'flex-end' } },
+                                    { position: 'bottom' },
                                 );
                             }}
                         />
@@ -223,9 +226,9 @@ const AccountScreen = (props) => {
                                 isBackground: true,
                                 adjust: 0.2,
                             },
-                            navigateScreen: 'HomeScreen1',
+                            navigateScreen: 'InfoUserScreen',
                             onPress: () => {
-                                navigation.navigate('HomeScreen1');
+                                navigation.navigate('InfoUserScreen');
                             },
                         },
                         {
@@ -247,6 +250,13 @@ const AccountScreen = (props) => {
                     ]}
                 />
 
+                <CButton
+                    iconOpts={{
+                        name: user ? 'ILogout' : 'ILogout',
+                        adjust: 0.4,
+                        size: 'lg',
+                    }}
+                />
                 <View style={{ height: 900 }}></View>
             </Animated.ScrollView>
         </View>
@@ -258,6 +268,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#F5F6FA',
     },
     headerContainer: {
         width: screenWidth,

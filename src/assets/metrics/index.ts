@@ -1,3 +1,4 @@
+import { TextStyle } from 'react-native';
 import { getDeviceInfo, getScreen } from '../../utils/Utils';
 const { isTablet } = getDeviceInfo();
 const scale = (size: number) => (getScreen().screenWidth / (isTablet ? 2 : 1) / BASE_WIDTH) * size;
@@ -32,7 +33,7 @@ export const fontSize = {
     xxl: scale(26),
 };
 
-export const fontWeight = {
+export const fontWeight: Record<string, TextStyle['fontWeight']> = {
     xs: '400',
     sm: '400',
     md: '500',

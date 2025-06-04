@@ -11,18 +11,15 @@ import type { RootState } from '../store/index';
 import { setLogout } from '../store/slices/user/userSlice';
 import { getScreen } from '../utils/Utils';
 
-const { screenWidth } = getScreen();
-
 const CustomDrawer = (props) => {
     const [expanded, setExpanded] = useState<string[]>([]);
+    const { info } = useSelector((state: RootState) => state.user);
     const dispatch = useDispatch();
     const {
         Metrics: { iconSize },
         Images: { MingAvt },
-        Svgs,
     } = useGetAssets();
-    const { info } = useSelector((state: RootState) => state.user);
-
+    const { screenWidth } = getScreen();
     return (
         <View style={{ flex: 1 }}>
             <DrawerContentScrollView {...props}>
@@ -70,7 +67,7 @@ const CustomDrawer = (props) => {
                                     }
                                 }}
                                 left={() => {
-                                    return <CSvg Svg={Svgs[icon]} isActive={isActive} size={iconSize.md} />;
+                                    return <CSvg svg={icon} isActive={isActive} size={iconSize.md} />;
                                 }}>
                                 {screens.map(({ screen, title }, index) => {
                                     return (

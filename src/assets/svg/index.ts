@@ -4,6 +4,7 @@ import IImageDefalut from './IImageDefalut';
 import INotification from './INotification';
 import IOrder from './IOrder';
 import IRight from './IRight';
+import ILeft from './ILeft';
 import IScheduled from './IScheduled';
 import ILogin from './ILogin';
 import ILogout from './ILogout';
@@ -15,6 +16,7 @@ const Svgs = {
     IScheduled,
     IHome,
     IRight,
+    ILeft,
     ILogin,
     ILogout,
 };

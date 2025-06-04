@@ -7,13 +7,13 @@ import { getAdjacentBreakpoint } from '../../utils/Utils';
 import CSvg from './CSvg';
 
 type CButtonProps = {
-  iconOpts?: any;
+  iconOpts?: Types.iconOpts;
   titleOpts: { text: string; style?: TextStyle };
   size?: Types.size;
   style?: ViewStyle;
 };
 
-const CButton = ({ style, size = SIZE_DEFAULT, titleOpts, iconOpts = {} }: CButtonProps) => {
+const CButton = ({ style, size = SIZE_DEFAULT, titleOpts, iconOpts }: CButtonProps) => {
   const { name, postion = 'left' } = iconOpts || {};
   const { text = 'Button', style: textStyle } = titleOpts || {};
   const isLeft = postion == 'left';
@@ -21,7 +21,6 @@ const CButton = ({ style, size = SIZE_DEFAULT, titleOpts, iconOpts = {} }: CButt
     Colors: { grayShades },
     Styles: { rowCenter },
     Metrics: { spacing, radius, fontSize },
-    Svgs,
   } = useGetAssets();
 
   const [sizeStart, sizeEnd] = getAdjacentBreakpoint(size);
@@ -39,7 +38,7 @@ const CButton = ({ style, size = SIZE_DEFAULT, titleOpts, iconOpts = {} }: CButt
         },
         style,
       ]}>
-      {isLeft && <CSvg Svg={Svgs[name]} {...iconOpts} />}
+      {isLeft && name && <CSvg svg={name} {...iconOpts} />}
       <Text
         style={[
           {
@@ -51,7 +50,7 @@ const CButton = ({ style, size = SIZE_DEFAULT, titleOpts, iconOpts = {} }: CButt
         ]}>
         {text}
       </Text>
-      {!isLeft && <CSvg Svg={Svgs[name]} {...iconOpts} />}
+      {!isLeft && name && <CSvg svg={name} {...iconOpts} />}
     </TouchableOpacity>
   );
 };

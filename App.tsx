@@ -9,6 +9,7 @@ import { initI18n } from './src/lib/i18n/index';
 import { TabNav, DrawerNav } from './src/navigators';
 import { ToastProvider } from './src/providers/ToastProvider';
 import { ModalProvider } from './src/providers/ModalProvider';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 function App(): JSX.Element {
     const [isI18nReady, setI18nReady] = useState(false);
@@ -30,33 +31,13 @@ function App(): JSX.Element {
 
     return (
         <RootSiblingParent>
-            <ToastProvider>
+            <SafeAreaProvider>
                 <NavigationContainer>
                     <ModalProvider>
                         <TabNav />
                     </ModalProvider>
                 </NavigationContainer>
-                <Toast
-                    config={{
-                        customToast: ({ text1, text2, props }) => (
-                            <View
-                                style={{
-                                    backgroundColor: props.backgroundColor,
-                                    padding: 12,
-                                    borderRadius: 8,
-                                    marginHorizontal: 16,
-                                    alignSelf: props.alignItems,
-                                    minWidth: 150,
-                                }}>
-                                <Text style={{ color: '#fff', fontSize: 20, fontWeight: '800', marginBottom: 6 }}>
-                                    {text1}
-                                </Text>
-                                <Text style={{ color: '#fff', fontSize: 20 }}>{text2}</Text>
-                            </View>
-                        ),
-                    }}
-                />
-            </ToastProvider>
+            </SafeAreaProvider>
         </RootSiblingParent>
     );
 }

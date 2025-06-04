@@ -1,4 +1,4 @@
-import { ComponentType, FC, Fragment } from 'react';
+import { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 import { Types } from '../../assets/types';
@@ -17,16 +17,17 @@ export interface _SvgProps extends SvgProps {
     onPress?: () => void;
 }
 interface CSvgWrapperProps extends _SvgProps {
-    Svg: ComponentType<any>;
+    svg: string;
 }
 
-const CSvg: FC<CSvgWrapperProps> = ({ Svg, ...Opts }) => {
+const CSvg: FC<CSvgWrapperProps> = ({ svg, ...Opts }) => {
     const { size = SIZE_DEFAULT, color, adjust = 0, isActive, isBackground, isScale, onPress, ...rest } = Opts;
     const [sizeStart] = getAdjacentBreakpoint(size);
     const {
         Colors: { svgActive, svgPrimary, grayShades },
         Metrics: { iconSize, radius, spacing },
         Styles: { rowCenter },
+        Svgs,
     } = useGetAssets();
 
     let _color = isActive ? svgActive : svgPrimary;
@@ -36,8 +37,9 @@ const CSvg: FC<CSvgWrapperProps> = ({ Svg, ...Opts }) => {
         _color = color;
     }
     const _size = isNumber(size) ? size : iconSize[size as string];
-    const SVG = <Svg {...{ isScale, size: _size, color: _color, ...rest }} />;
-    if (!isBackground) return <Fragment>{SVG}</Fragment>;
+    const _SVG = Svgs[svg];
+    const SVG = <_SVG {...{ isScale, size: _size, color: _color, ...rest }} />;
+    if (!isBackground) return <TouchableOpacity onPress={onPress}>{SVG}</TouchableOpacity>;
     return (
         <TouchableOpacity
             style={[

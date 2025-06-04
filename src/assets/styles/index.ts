@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { spacing } from '../metrics';
 
 const Styles = StyleSheet.create({
     rowCenter: {
@@ -67,6 +68,18 @@ const Styles = StyleSheet.create({
     flexChild: {
         alignSelf: 'stretch',
         flex: 1,
+    },
+    modalBottom: {
+        borderTopLeftRadius: spacing.md,
+        borderTopRightRadius: spacing.md,
+    },
+    modalCenter: {
+        borderRadius: spacing.lg,
+        margin: spacing.lg,
+    },
+    modalTop: {
+        borderBottomLeftRadius: spacing.md,
+        borderBottomRightRadius: spacing.md,
     },
 });
 
