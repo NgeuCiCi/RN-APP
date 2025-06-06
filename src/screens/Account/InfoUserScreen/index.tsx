@@ -6,11 +6,9 @@ interface Props { }
 
 const InfoUserScreen: React.FC<Props> = (props) => {
     return (
-        <View style={styles.container}>
-            <CLayout >
-                <Text>InfoUserScreen</Text>
-            </CLayout>
-        </View>
+        <CLayout >
+            <Text>InfoUserScreen</Text>
+        </CLayout>
     );
 };
 

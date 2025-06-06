@@ -1,8 +1,9 @@
-import { Text, View, ViewStyle } from 'react-native';
+import { Text, useWindowDimensions, View, ViewStyle } from 'react-native';
 import { withMemo } from '../../hoc';
 import useGetAssets from '../../hooks/useGetAssets';
 // import { TabView, TabBar } from 'react-native-tab-view';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
+import { SceneMap, TabView } from 'react-native-tab-view';
 
 type CTabViewProps = {
   style?: ViewStyle;
@@ -36,26 +37,32 @@ const CTabView = ({ style }: CTabViewProps) => {
   //   );
   // };
   // const renderScene = () => <></>;
-
-  console.log("TCL: SangBT: ",)
-  return (
-    <View>
-      <Text>123123</Text>
+  const aa = () => {
+    return <View>
+      <Text>
+        123
+      </Text>
     </View>
-    // <TabView
-    //   onIndexChange={onIndexChange}
-    //   navigationState={{
-    //     index: tab,
-    //     routes: [
-    //       { key: 'T01', title: 'Lịch hẹn' },
-    //       { key: 'T02', title: 'Đã hoàn tất' },
-    //       { key: 'T03', title: 'Đã quá hạn' },
-    //     ],
-    //   }}
-    //   renderScene={renderScene}
-    //   renderTabBar={renderTabBar}
-    //   swipeEnabled={false}
-    // />
+  }
+  const renderScene = SceneMap({
+    first: aa,
+    second: aa,
+  });
+  const routes = [
+    { key: 'first', title: 'First' },
+    { key: 'second', title: 'Second' },
+  ];
+
+  const layout = useWindowDimensions();
+  const [index, setIndex] = useState(0);
+
+  return (
+    <TabView
+      navigationState={{ index, routes }}
+      renderScene={renderScene}
+      onIndexChange={setIndex}
+      initialLayout={{ width: layout.width }}
+    />
   );
 };
 

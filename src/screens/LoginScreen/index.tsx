@@ -11,7 +11,7 @@ import { setLogin } from '../../store/slices/user/userSlice';
 function LoginScreen({ navigation }) {
     const { version } = getDeviceInfo();
     const dispatch = useDispatch();
-    const { ToastNoblandMessageMulti } = useToast();
+    // const { ToastNoblandMessageMulti } = useToast();
 
     const [username, setUsername] = useState('hieuhoang@ucall.asia');
 

@@ -2,8 +2,8 @@ import _ from 'lodash';
 import { Dimensions } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import tinycolor from 'tinycolor2';
-import { Types } from '../assets/types';
-import { NAME_BREAKPOINT } from '../constants';
+import { NAME_BREAKPOINT, Types } from '../constants';
+import { iconSize } from '../assets/metrics';
 
 export const getScreen = () => {
     const scale = Dimensions.get('screen').scale / Dimensions.get('window').scale;
@@ -12,6 +12,7 @@ export const getScreen = () => {
         screenWidth: Dimensions.get('window').width * scale,
     };
 };
+export const isTablet = () => DeviceInfo.isTablet();
 
 export const getDeviceInfo = () => {
     return { version: DeviceInfo.getVersion(), isTablet: DeviceInfo.isTablet(), deviceId: DeviceInfo.getDeviceId };
@@ -25,9 +26,10 @@ export const getFontSizeByScreen = (type: 'height' | 'width' = 'width') => {
 
     return scale * px;
 };
-export const scaleSize = (value: number) => {
+export const scaleSize = (value: Types.size) => {
     const { isTablet } = getDeviceInfo();
-    return isTablet ? value * 3 : value;
+    let size = isNumber(value) ? value : iconSize[value];
+    return isTablet ? size * 3 : size;
 };
 
 export const isEmpty = (obj) => {

@@ -1,11 +1,11 @@
 import { memo } from 'react';
 import Svg, { Circle, G, Path } from 'react-native-svg';
 import { _SvgProps } from '../../components/common/CSvg';
+import { SVG_SIZE_DEFAULT, Types } from '../../constants';
 
-const SvgComponent = (props: _SvgProps) => {
-    let { size = 20, color } = props;
+function SvgComponent({ height, width, color }: Types.SvgComponentProps) {
     return (
-        <Svg viewBox={'0 0 256 256'} width={size} height={size} {...props}>
+        <Svg viewBox={'0 0 256 256'} width={width || SVG_SIZE_DEFAULT} height={height || SVG_SIZE_DEFAULT} >
             <Path d="M0 256V0h256v256z" fill="none" />
             <G transform="scale(10.66667)" fill={color}>
                 <Path d="M18 21H6a3 3 0 0 1-3-3V7h18v11a3 3 0 0 1-3 3z" opacity={0.5} />

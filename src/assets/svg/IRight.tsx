@@ -1,11 +1,11 @@
 import { memo } from 'react';
 import Svg, { G, Path } from 'react-native-svg';
 import { _SvgProps } from '../../components/common/CSvg';
+import { SVG_SIZE_DEFAULT, Types } from '../../constants';
 
-const SvgComponent = (props: _SvgProps) => {
-    let { size = 16, color } = props;
+function SvgComponent({ height, width, color }: Types.SvgComponentProps) {
     return (
-        <Svg viewBox={'0 0 16 16'} width={size} height={size} {...props}>
+        <Svg viewBox={'0 0 16 16'} width={width || SVG_SIZE_DEFAULT} height={height || SVG_SIZE_DEFAULT}>
             <G data-name="Group 15462">
                 <G data-name="download (19)">
                     <Path data-name="Path 5819" d="M0 16V0h16v16Z" fill="none" />
@@ -24,7 +24,7 @@ const SvgComponent = (props: _SvgProps) => {
             </G>
         </Svg>
     );
-};
+}
 
 const Memo = memo(SvgComponent);
 export default Memo;

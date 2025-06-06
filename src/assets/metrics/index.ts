@@ -1,36 +1,45 @@
 import { TextStyle } from 'react-native';
-import { getDeviceInfo, getScreen } from '../../utils/Utils';
+import { scale, verticalScale } from 'react-native-size-matters';
+import { getDeviceInfo } from '../../utils/Utils';
 const { isTablet } = getDeviceInfo();
-const scale = (size: number) => (getScreen().screenWidth / (isTablet ? 2 : 1) / BASE_WIDTH) * size;
-const BASE_WIDTH = 390;
-const spacingUnit = scale(4);
 
-export const spacing = {
-    xs: spacingUnit * 1,
-    sm: spacingUnit * 2,
-    md: spacingUnit * 3,
-    lg: spacingUnit * 4,
-    xl: spacingUnit * 8,
-    xxl: spacingUnit * 12,
+const spacingHorizontalUnit = scale(4);
+const spacingVerticaltUnit = verticalScale(4);
+
+export const spacingHorizontal = {
+    xs: spacingHorizontalUnit * 1,
+    sm: spacingHorizontalUnit * 2,
+    md: spacingHorizontalUnit * 3,
+    lg: spacingHorizontalUnit * 4,
+    xl: spacingHorizontalUnit * 8,
+    xxl: spacingHorizontalUnit * 12,
 };
 
+export const spacingVertical = {
+    xs: spacingVerticaltUnit * 1,
+    sm: spacingVerticaltUnit * 2,
+    md: spacingVerticaltUnit * 3,
+    lg: spacingVerticaltUnit * 4,
+    xl: spacingVerticaltUnit * 8,
+    xxl: spacingVerticaltUnit * 12,
+};
 export const radius = {
     none: 0,
-    xs: spacingUnit * 0.5,
-    sm: spacingUnit * 1,
-    md: spacingUnit * 2,
-    lg: spacingUnit * 4,
-    xl: spacingUnit * 6,
+    xs: spacingHorizontalUnit * 0.5,
+    sm: spacingHorizontalUnit * 1,
+    md: spacingHorizontalUnit * 2,
+    lg: spacingHorizontalUnit * 4,
+    xl: spacingHorizontalUnit * 6,
     xxl: 9999,
 };
 
 export const fontSize = {
-    xs: scale(12),
-    sm: scale(14),
-    md: scale(18),
-    lg: scale(20),
-    xl: scale(22),
-    xxl: scale(26),
+    xs: 12,
+    sm: 14,
+    md: 16,
+    lg: 18,
+    xl: 20,
+    xxl: 24,
 };
 
 export const fontWeight: Record<string, TextStyle['fontWeight']> = {
@@ -43,20 +52,21 @@ export const fontWeight: Record<string, TextStyle['fontWeight']> = {
 };
 
 export const iconSize = {
-    xs: scale(16),
-    sm: scale(20),
-    md: scale(24),
-    lg: scale(28),
-    xl: scale(32),
-    xxl: scale(36),
+    xs: 16,
+    sm: 20,
+    md: 24,
+    lg: 28,
+    xl: 32,
+    xxl: 48,
 };
 
 const Metrics = {
-    spacing,
     radius,
     fontSize,
     fontWeight,
     iconSize,
+    spacingVertical,
+    spacingHorizontal,
 };
 
 export default Metrics;

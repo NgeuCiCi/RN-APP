@@ -1,16 +1,19 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { useGetAssets } from '../../hooks';
 import HeaderTabNav from '../../navigators/HeaderTabNav';
 import CTabView from '../common/CTabView';
+interface CLayoutProps {
+    children?: ReactNode;
+}
 
-interface Props { }
-
-const CLayout: FC<Props> = (props) => {
+const CLayout: FC<CLayoutProps> = ({ children }) => {
     return (
         <View style={styles.container}>
             <HeaderTabNav title={'Thông tin'} iconOpts={{ name: 'IOrder', title: '123', isBackground: true }} />
             <CTabView />
-            {props.children}
+
+            {children}
         </View>
     );
 };

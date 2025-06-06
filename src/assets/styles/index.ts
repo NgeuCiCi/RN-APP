@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { spacing } from '../metrics';
+import { radius, spacingVertical, spacingHorizontal } from '../metrics';
 
 const Styles = StyleSheet.create({
     rowCenter: {
@@ -70,16 +70,17 @@ const Styles = StyleSheet.create({
         flex: 1,
     },
     modalBottom: {
-        borderTopLeftRadius: spacing.md,
-        borderTopRightRadius: spacing.md,
+        borderTopLeftRadius: radius.md,
+        borderTopRightRadius: radius.md,
     },
     modalCenter: {
-        borderRadius: spacing.lg,
-        margin: spacing.lg,
+        borderRadius: radius.lg,
+        marginHorizontal: spacingHorizontal.lg,
+        marginVertical: spacingVertical.lg,
     },
     modalTop: {
-        borderBottomLeftRadius: spacing.md,
-        borderBottomRightRadius: spacing.md,
+        borderBottomLeftRadius: radius.md,
+        borderBottomRightRadius: radius.md,
     },
 });
 

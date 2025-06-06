@@ -20,7 +20,7 @@ const CButton = ({ style, size = SIZE_DEFAULT, titleOpts, iconOpts }: CButtonPro
   const {
     Colors: { grayShades },
     Styles: { rowCenter },
-    Metrics: { spacing, radius, fontSize },
+    Metrics: { spacingVertical, spacingHorizontal, radius, fontSize },
   } = useGetAssets();
 
   const [sizeStart, sizeEnd] = getAdjacentBreakpoint(size);
@@ -33,7 +33,7 @@ const CButton = ({ style, size = SIZE_DEFAULT, titleOpts, iconOpts }: CButtonPro
         rowCenter,
         {
           backgroundColor: grayShades[1],
-          paddingVertical: spacing[size],
+          paddingVertical: spacingVertical[size],
           borderRadius: radius[sizeEnd],
         },
         style,
@@ -45,7 +45,7 @@ const CButton = ({ style, size = SIZE_DEFAULT, titleOpts, iconOpts }: CButtonPro
             fontSize: fontSize[size],
             fontWeight: '700',
           },
-          isLeft ? { paddingLeft: spacing[sizeStart] } : { paddingRight: spacing[sizeStart] },
+          isLeft ? { paddingLeft: spacingHorizontal[sizeStart] } : { paddingRight: spacingHorizontal[sizeStart] },
           textStyle,
         ]}>
         {text}

@@ -1,6 +1,5 @@
 import { FC, Fragment } from 'react';
 import { Platform, StatusBar, StyleSheet, Text, View } from 'react-native';
-import { Types } from '../assets/types';
 import { CSvg } from '../components';
 import { withMemo } from '../hoc';
 import { useGetAssets } from '../hooks';
@@ -8,6 +7,7 @@ import { getScreen } from '../utils/Utils';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Types } from '../constants';
 
 interface HeaderTabNavProps {
     title: string;
@@ -20,7 +20,7 @@ const HeaderTabNav: FC<HeaderTabNavProps> = (props) => {
     const { name, title: titleRight = '' } = iconOpts || {};
 
     const {
-        Metrics: { spacing, fontSize, fontWeight },
+        Metrics: { spacingHorizontal, spacingVertical, fontSize, fontWeight },
         Styles: { rowAlignCenter },
         Colors: { white, svgPrimary },
     } = useGetAssets();
@@ -29,7 +29,6 @@ const HeaderTabNav: FC<HeaderTabNavProps> = (props) => {
     const insets = useSafeAreaInsets();
 
     const statusBarHeight = Platform.OS === 'android' ? StatusBar.currentHeight || insets.top : insets.top;
-    console.log('TCL: SangBT: statusBarHeight', statusBarHeight);
 
     const { screenWidth } = getScreen();
 
@@ -48,8 +47,8 @@ const HeaderTabNav: FC<HeaderTabNavProps> = (props) => {
                 {
                     marginTop: statusBarHeight,
                     width: screenWidth,
-                    paddingHorizontal: spacing.lg,
-                    paddingVertical: spacing.md,
+                    paddingHorizontal: spacingHorizontal.lg,
+                    paddingVertical: spacingVertical.sm,
                     backgroundColor: white,
                 },
             ]}>
@@ -59,7 +58,7 @@ const HeaderTabNav: FC<HeaderTabNavProps> = (props) => {
                     color: svgPrimary,
                     fontSize: fontSize.lg,
                     fontWeight: fontWeight.lg,
-                    paddingLeft: spacing.md,
+                    paddingLeft: spacingHorizontal.md,
                 }}>
                 {t(title)}
             </Text>
@@ -70,7 +69,7 @@ const HeaderTabNav: FC<HeaderTabNavProps> = (props) => {
                             {
                                 marginLeft: 'auto',
                                 fontSize: fontSize.sm,
-                                paddingRight: spacing.md,
+                                paddingRight: spacingHorizontal.md,
                             },
                         ]}>
                         {t(titleRight)}

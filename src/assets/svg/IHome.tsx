@@ -1,11 +1,15 @@
 import React from 'react';
 import Svg, { Path } from 'react-native-svg';
 import { _SvgProps } from '../../components/common/CSvg';
+import { SVG_SIZE_DEFAULT, Types } from '../../constants';
 
-function SvgComponent(props: _SvgProps) {
-  let { size = 24, color } = props;
+function SvgComponent({ height, width, color }: Types.SvgComponentProps) {
   return (
-    <Svg data-name="Group 10135" width={size} height={size} viewBox="0 0 24 24" {...props}>
+    <Svg
+      data-name="Group 10135"
+      width={width || SVG_SIZE_DEFAULT}
+      height={height || SVG_SIZE_DEFAULT}
+      viewBox="0 0 24 24">
       <Path data-name="Path 3544" d="M0 0h24v24H0z" fill="none" />
       <Path
         data-name="Path 3545"

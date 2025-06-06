@@ -22,7 +22,7 @@ const AccountScreen = (props) => {
         Metrics: { },
         Styles: { },
         Svgs: { IImageDefalut, INotification },
-        Images: { MingAvt, defaultCover },
+        Images: { MingAvt, DefaultCover },
         Colors: { grayShades },
     } = useGetAssets();
 
@@ -93,7 +93,7 @@ const AccountScreen = (props) => {
                         height: screenHeight * (isTablet ? 0.5 : 0.25),
                     },
                 ]}
-                source={defaultCover}
+                source={DefaultCover}
                 resizeMode={FastImage.resizeMode.cover}>
                 <View style={[styles.opacityView]}>
                     <View>

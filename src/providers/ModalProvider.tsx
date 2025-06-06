@@ -53,7 +53,7 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
     const { justifyContent, styleName, swipeDirection, animationIn, animationOut } = OPTS[position] || {};
 
     const {
-        Metrics: { spacing },
+        Metrics: { spacingHorizontal, spacingVertical },
         Styles,
     } = useGetAssets();
 
@@ -96,11 +96,23 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
                 {modalContent && (
                     <View style={[{ backgroundColor: '#fff' }, Styles[styleName]]}>
                         {position === 'bottom' && (
-                            <CLine style={{ height: spacing.sm, width: spacing.xxl, marginTop: spacing.sm }} />
+                            <CLine
+                                style={{
+                                    height: spacingVertical.sm,
+                                    width: spacingHorizontal.xxl,
+                                    marginTop: spacingVertical.sm,
+                                }}
+                            />
                         )}
                         {component}
                         {position === 'top' && (
-                            <CLine style={{ height: spacing.sm, width: spacing.xxl, marginBottom: spacing.sm }} />
+                            <CLine
+                                style={{
+                                    height: spacingVertical.sm,
+                                    width: spacingHorizontal.xxl,
+                                    marginBottom: spacingVertical.sm,
+                                }}
+                            />
                         )}
                     </View>
                 )}

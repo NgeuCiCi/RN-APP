@@ -31,7 +31,7 @@ const CItemIconTitle: FunctionComponent<CItemIconTitleProps> = (props) => {
         navigateScreen,
     } = props;
     const {
-        Metrics: { spacing, fontSize, fontWeight },
+        Metrics: { spacingHorizontal, spacingVertical, fontSize, fontWeight },
         Styles: { rowAlignCenter, flexChild },
         Svgs,
     } = useGetAssets();
@@ -49,8 +49,11 @@ const CItemIconTitle: FunctionComponent<CItemIconTitleProps> = (props) => {
     }, []);
 
     return (
-        <View style={{ paddingHorizontal: spacing[size] }}>
-            <TouchableOpacity activeOpacity={1} onPress={handlePress} style={{ paddingVertical: spacing[size] }}>
+        <View style={{ paddingHorizontal: spacingHorizontal[size] }}>
+            <TouchableOpacity
+                activeOpacity={1}
+                onPress={handlePress}
+                style={{ paddingVertical: spacingVertical[size] }}>
                 <View style={[rowAlignCenter, { gap: 12 }]}>
                     <CSvg svg={name} size={size} {...iconOpts} />
                     <View style={[flexChild, { justifyContent: 'center' }]}>

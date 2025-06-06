@@ -8,6 +8,7 @@ import ILeft from './ILeft';
 import IScheduled from './IScheduled';
 import ILogin from './ILogin';
 import ILogout from './ILogout';
+import IWiddy from './IWiddy';
 const Svgs = {
     IAccount,
     IImageDefalut,
@@ -19,6 +20,7 @@ const Svgs = {
     ILeft,
     ILogin,
     ILogout,
+    IWiddy,
 };
 
 export default Svgs;
