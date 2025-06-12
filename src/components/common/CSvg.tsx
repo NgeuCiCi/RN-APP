@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
+import { isTablet } from 'react-native-device-info';
+import { scale, verticalScale } from 'react-native-size-matters';
 import { SvgProps } from 'react-native-svg';
 import { SIZE_DEFAULT, Types } from '../../constants';
 import { withMemo } from '../../hoc';
-import useGetAssets from '../../hooks/useGetAssets';
+import { useTheme } from '../../theme';
 import { adjustColor, getAdjacentBreakpoint, isNumber } from '../../utils/Utils';
-import { isTablet } from 'react-native-device-info';
-import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 
 export interface _SvgProps extends SvgProps {
     isActive?: boolean;
@@ -25,11 +25,11 @@ const CSvg: FC<CSvgWrapperProps> = ({ svg, ...Opts }) => {
     const { size = SIZE_DEFAULT, color, adjust = 0, isActive, isBackground, height, width, onPress } = Opts;
     const [sizeStart] = getAdjacentBreakpoint(size);
     const {
-        Colors: { svgActive, svgPrimary, grayShades },
+        Colors: { svgActive, svgPrimary },
         Metrics: { iconSize, radius, spacingHorizontal, spacingVertical },
         Styles: { rowCenter },
         Svgs,
-    } = useGetAssets();
+    } = useTheme();
 
     let _color = isActive ? svgActive : svgPrimary;
     _color = adjustColor(_color, adjust);
@@ -51,7 +51,7 @@ const CSvg: FC<CSvgWrapperProps> = ({ svg, ...Opts }) => {
             style={[
                 rowCenter,
                 {
-                    backgroundColor: grayShades[1],
+                    backgroundColor: '#e3e3e3',
                     borderRadius: radius[size] || radius[SIZE_DEFAULT],
                     paddingVertical: spacingVertical[sizeStart] || spacingVertical[SIZE_DEFAULT],
                     paddingHorizontal: spacingHorizontal[sizeStart] || spacingHorizontal[SIZE_DEFAULT],

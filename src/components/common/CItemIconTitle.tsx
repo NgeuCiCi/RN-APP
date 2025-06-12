@@ -1,10 +1,9 @@
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/core';
 import { FunctionComponent, useCallback } from 'react';
 import { Text, TouchableOpacity, View, ViewStyle } from 'react-native';
-import { Types } from '../../assets/types';
-import { SIZE_DEFAULT } from '../../constants';
+import { SIZE_DEFAULT, Types } from '../../constants';
 import { withMemo } from '../../hoc';
-import { useGetAssets } from '../../hooks';
+import { useTheme } from '../../theme';
 import { getAdjacentBreakpoint } from '../../utils/Utils';
 import CLine from './CLine';
 import CSvg from './CSvg';
@@ -33,8 +32,7 @@ const CItemIconTitle: FunctionComponent<CItemIconTitleProps> = (props) => {
     const {
         Metrics: { spacingHorizontal, spacingVertical, fontSize, fontWeight },
         Styles: { rowAlignCenter, flexChild },
-        Svgs,
-    } = useGetAssets();
+    } = useTheme();
     const { name = 'IImageDefalut' } = iconOpts || {};
     const { title = 'Title', titleStyle, label, labelStyle } = titleOpts || {};
     const [sizeStart] = getAdjacentBreakpoint(size);
@@ -44,7 +42,7 @@ const CItemIconTitle: FunctionComponent<CItemIconTitleProps> = (props) => {
         if (onPress) {
             onPress();
         } else {
-            navigateScreen && navigation.navigate(navigateScreen);
+            navigateScreen && navigation.navigate(navigateScreen as never);
         }
     }, []);
 

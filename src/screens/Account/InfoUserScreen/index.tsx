@@ -1,12 +1,12 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { CLayout } from '../../../components';
+import { CLayout } from '@/components';
+import { FC } from 'react';
+import { StyleSheet, Text } from 'react-native';
 
 interface Props { }
 
-const InfoUserScreen: React.FC<Props> = (props) => {
+const InfoUserScreen: FC<Props> = (props) => {
     return (
-        <CLayout >
+        <CLayout>
             <Text>InfoUserScreen</Text>
         </CLayout>
     );

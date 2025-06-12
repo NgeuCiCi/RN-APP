@@ -1,13 +1,14 @@
+import { useNavigation } from '@react-navigation/core';
 import { FC, Fragment } from 'react';
-import { Platform, StatusBar, StyleSheet, Text, View } from 'react-native';
-import { CSvg } from '../components';
-import { withMemo } from '../hoc';
-import { useGetAssets } from '../hooks';
-import { getScreen } from '../utils/Utils';
-import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
+import { Platform, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { moderateScale } from 'react-native-size-matters';
+import { CSvg } from '../components';
 import { Types } from '../constants';
+import { withMemo } from '../hoc';
+import { useTheme } from '../theme';
+import { getScreen } from '../utils/Utils';
 
 interface HeaderTabNavProps {
     title: string;
@@ -23,7 +24,7 @@ const HeaderTabNav: FC<HeaderTabNavProps> = (props) => {
         Metrics: { spacingHorizontal, spacingVertical, fontSize, fontWeight },
         Styles: { rowAlignCenter },
         Colors: { white, svgPrimary },
-    } = useGetAssets();
+    } = useTheme();
     const navigation = useNavigation();
     const { t } = useTranslation();
     const insets = useSafeAreaInsets();
@@ -68,7 +69,7 @@ const HeaderTabNav: FC<HeaderTabNavProps> = (props) => {
                         style={[
                             {
                                 marginLeft: 'auto',
-                                fontSize: fontSize.sm,
+                                fontSize: moderateScale(fontSize.sm),
                                 paddingRight: spacingHorizontal.md,
                             },
                         ]}>

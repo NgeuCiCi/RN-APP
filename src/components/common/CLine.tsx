@@ -1,6 +1,6 @@
 import { View, ViewStyle } from 'react-native';
 import { withMemo } from '../../hoc';
-import useGetAssets from '../../hooks/useGetAssets';
+import { useTheme } from '../../theme';
 
 type CLineProps = {
   style?: ViewStyle;
@@ -9,16 +9,16 @@ type CLineProps = {
 const CLine = ({ style }: CLineProps) => {
   const { width } = style || {};
   const {
-    Colors: { grayShades },
     Metrics: { radius },
     Styles: { rowJustifyCenter },
-  } = useGetAssets();
+  } = useTheme();
+
   return (
     <View style={[rowJustifyCenter]}>
       <View
         style={[
           {
-            backgroundColor: grayShades[1],
+            backgroundColor: '#e3e3e3',
             borderRadius: radius.sm,
             height: 1,
           },

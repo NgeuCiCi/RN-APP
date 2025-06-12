@@ -2,13 +2,13 @@ import { Fragment, useCallback, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Animated, RefreshControl, StyleSheet, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { CButton, CItemIconTitle, CListIconTitle, CSvg } from '../../components';
-import { useGetAssets } from '../../hooks';
+import { CButton, CListIconTitle, CSvg } from '../../components';
 import { FastImage } from '../../lib';
 import { useAppModal } from '../../providers/ModalProvider';
 import { RootState } from '../../store';
+import { useTheme } from '../../theme';
 import { getDeviceInfo, getFontSizeByScreen, getScreen } from '../../utils/Utils';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/core';
 
 const offsetY = new Animated.Value(0);
 const { screenHeight, screenWidth } = getScreen();
@@ -21,10 +21,8 @@ const AccountScreen = (props) => {
     const {
         Metrics: { },
         Styles: { },
-        Svgs: { IImageDefalut, INotification },
         Images: { MingAvt, DefaultCover },
-        Colors: { grayShades },
-    } = useGetAssets();
+    } = useTheme();
 
     const [refreshing, setRefreshing] = useState(false);
     const scrollViewRef: any = useRef(null);
@@ -173,7 +171,7 @@ const AccountScreen = (props) => {
             style={[
                 styles.container,
                 {
-                    backgroundColor: grayShades[0],
+                    backgroundColor: '#f0f1f5',
                 },
             ]}>
             {_renderHeader}

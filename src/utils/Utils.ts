@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import tinycolor from 'tinycolor2';
 import { NAME_BREAKPOINT, Types } from '../constants';
-import { iconSize } from '../assets/metrics';
+import { iconSize } from '../theme/assets/metrics';
 
 export const getScreen = () => {
     const scale = Dimensions.get('screen').scale / Dimensions.get('window').scale;

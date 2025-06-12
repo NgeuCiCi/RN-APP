@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react';
 import { Text, View, ViewStyle } from 'react-native';
+import { SIZE_DEFAULT, Types } from '../../constants';
 import { withMemo } from '../../hoc';
-import { useGetAssets } from '../../hooks';
+import { useTheme } from '../../theme';
 import { getAdjacentBreakpoint, isEmpty } from '../../utils/Utils';
 import CItemIconTitle, { CItemIconTitleProps } from './CItemIconTitle';
-import { SIZE_DEFAULT, Types } from '../../constants';
 
 interface CListIconTitleProps {
     isHaveIRight?: boolean;
@@ -18,8 +18,7 @@ const CListIconTitle: FunctionComponent<CListIconTitleProps> = (props) => {
     const { title, titleStyle } = titleOpts || {};
     const {
         Metrics: { spacingVertical, fontSize, fontWeight, radius },
-        Colors: { grayShades },
-    } = useGetAssets();
+    } = useTheme();
     const [sizeStart, sizeEnd] = getAdjacentBreakpoint(size);
 
     if (isEmpty(list)) return null;
@@ -32,7 +31,7 @@ const CListIconTitle: FunctionComponent<CListIconTitleProps> = (props) => {
                             fontSize: fontSize[sizeEnd],
                             fontWeight: fontWeight[sizeEnd],
                             paddingBottom: spacingVertical[size],
-                            color: grayShades[2],
+                            color: '#999999',
                         },
                         titleStyle,
                     ]}>

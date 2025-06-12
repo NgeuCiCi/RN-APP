@@ -5,10 +5,10 @@ import { List } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { CSvg } from '../components';
 import { NAME_STACKS } from '../constants';
-import { useGetAssets } from '../hooks';
 import { FastImage } from '../lib';
 import type { RootState } from '../store/index';
 import { setLogout } from '../store/slices/user/userSlice';
+import { useTheme } from '../theme';
 import { getScreen } from '../utils/Utils';
 
 const CustomDrawer = (props) => {
@@ -18,7 +18,8 @@ const CustomDrawer = (props) => {
     const {
         Metrics: { iconSize },
         Images: { MingAvt },
-    } = useGetAssets();
+        Metrics: { spacingHorizontal, spacingVertical, fontSize, fontWeight },
+    } = useTheme();
     const { screenWidth } = getScreen();
     return (
         <View style={{ flex: 1 }}>
@@ -56,7 +57,9 @@ const CustomDrawer = (props) => {
                                 id={name}
                                 title={title}
                                 titleStyle={
-                                    isActive ? { fontSize: 16, fontWeight: 'bold', color: '#feb729' } : { fontSize: 16 }
+                                    isActive
+                                        ? { fontSize: fontSize.sm, fontWeight: 'bold', color: '#feb729' }
+                                        : { fontSize: fontSize.sm }
                                 }
                                 style={{}}
                                 onPress={() => {

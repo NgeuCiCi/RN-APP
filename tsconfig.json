@@ -6,22 +6,12 @@
         "experimentalDecorators": true,
         "noImplicitAny": false,
         "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
         "paths": {
-            "@assets/*": ["src/assets/*"],
-            "@components/*": ["src/components/*"],
-            "@config/*": ["src/config/*"],
-            "@constants/*": ["src/constants/*"],
-            "@hoc/*": ["src/hoc/*"],
-            "@hooks/*": ["src/hooks/*"],
-            "@lib/*": ["src/lib/*"],
-            "@locale/*": ["src/locale/*"],
-            "@models/*": ["src/models/*"],
-            "@navigators/*": ["src/navigators/*"],
-            "@screens/*": ["src/screens/*"],
-            "@store/*": ["src/store/*"],
-            "@style/*": ["src/style/*"],
-            "@utils/*": ["src/utils/*"],
-            "@src/*": ["src/*", "./dist/*", ""]
+            "@/*": [
+                "src/*"
+            ]
         }
     }
 }

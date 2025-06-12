@@ -2,11 +2,10 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import { Button, Card, Text, TextInput, useTheme } from 'react-native-paper';
-import { ToastState, useToast } from '../../providers/ToastProvider';
-import { useLoginMutation } from '../../store/services/auth/services';
-import { getDeviceInfo } from '../../utils/Utils';
 import { useDispatch } from 'react-redux';
+import { useLoginMutation } from '../../store/services/auth/services';
 import { setLogin } from '../../store/slices/user/userSlice';
+import { getDeviceInfo } from '../../utils/Utils';
 
 function LoginScreen({ navigation }) {
     const { version } = getDeviceInfo();

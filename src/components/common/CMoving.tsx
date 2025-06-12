@@ -1,6 +1,6 @@
 import { Fragment, ReactNode, useEffect, useMemo, useRef, useState } from 'react';
-import { Animated, Text, TouchableOpacity, View } from 'react-native';
-import { useGetAssets } from '../../hooks';
+import { Animated, View } from 'react-native';
+import { useTheme } from '../../theme';
 
 interface CMovingProps {
     cmp: ReactNode;
@@ -32,7 +32,7 @@ const CMoving = ({
     const [containerWidth, setContainerWidth] = useState(0);
     const {
         Styles: { rowCenter },
-    } = useGetAssets();
+    } = useTheme();
 
     const _heightLine = heightLine;
 

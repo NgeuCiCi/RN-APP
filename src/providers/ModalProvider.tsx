@@ -1,8 +1,8 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
 import { View, ViewStyle } from 'react-native';
 import { CLine } from '../components';
-import { useGetAssets } from '../hooks';
 import { Modal } from '../lib';
+import { useTheme } from '../theme';
 import { getScreen } from '../utils/Utils';
 type ModalContextType = {
     onShowModal: (content: ReactNode, Otps?: OtpsType) => void;
@@ -55,7 +55,7 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
     const {
         Metrics: { spacingHorizontal, spacingVertical },
         Styles,
-    } = useGetAssets();
+    } = useTheme();
 
     const onShowModal = (component: ReactNode, Otps?: OtpsType) => {
         const { style = {}, position } = Otps || {};

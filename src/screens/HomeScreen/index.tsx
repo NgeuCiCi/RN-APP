@@ -1,8 +1,7 @@
-import { useEffect, useLayoutEffect } from 'react';
+import { useNavigation } from '@react-navigation/core';
 import { StyleSheet, View } from 'react-native';
 import { MD2Colors, Text } from 'react-native-paper';
 import { getDeviceInfo } from '../../utils/Utils';
-import { useNavigation } from '@react-navigation/native';
 
 function HomeScreen() {
     const { version } = getDeviceInfo();

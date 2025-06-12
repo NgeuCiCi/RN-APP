@@ -1,14 +1,13 @@
 import { Text, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
-import { Types } from '../../assets/types';
-import { SIZE_DEFAULT } from '../../constants';
+import { SIZE_DEFAULT, Types } from '../../constants';
 import { withMemo } from '../../hoc';
-import { useGetAssets } from '../../hooks';
+import { useTheme } from '../../theme';
 import { getAdjacentBreakpoint } from '../../utils/Utils';
 import CSvg from './CSvg';
 
 type CButtonProps = {
   iconOpts?: Types.iconOpts;
-  titleOpts: { text: string; style?: TextStyle };
+  titleOpts?: { text: string; style?: TextStyle };
   size?: Types.size;
   style?: ViewStyle;
 };
@@ -18,10 +17,9 @@ const CButton = ({ style, size = SIZE_DEFAULT, titleOpts, iconOpts }: CButtonPro
   const { text = 'Button', style: textStyle } = titleOpts || {};
   const isLeft = postion == 'left';
   const {
-    Colors: { grayShades },
     Styles: { rowCenter },
     Metrics: { spacingVertical, spacingHorizontal, radius, fontSize },
-  } = useGetAssets();
+  } = useTheme();
 
   const [sizeStart, sizeEnd] = getAdjacentBreakpoint(size);
 
@@ -32,7 +30,7 @@ const CButton = ({ style, size = SIZE_DEFAULT, titleOpts, iconOpts }: CButtonPro
       style={[
         rowCenter,
         {
-          backgroundColor: grayShades[1],
+          backgroundColor: '#e3e3e3',
           paddingVertical: spacingVertical[size],
           borderRadius: radius[sizeEnd],
         },
